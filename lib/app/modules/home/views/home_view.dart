@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:movie_recommendation_system/app/data/model/select_movies.dart';
+import 'package:movie_recommendation_system/app/data/widgets/select_movie_widget.dart';
 import 'package:movie_recommendation_system/app/routes/app_pages.dart';
 
-import '../../../data/model/movies.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -13,40 +16,36 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       backgroundColor: Color(0xFF262F42),
       appBar: AppBar(
-        title: Text('Select Movies You Like'),
-
+        title: GetBuilder<HomeController>(
+          builder: (controller) {
+            return Text(controller.isSelected
+                ? "Movies Selected : ${controller.selectedMovies.length} "
+                : 'Select Movies You Like');
+          },
+        ),
         centerTitle: true,
-        actions: [
-          IconButton(
-              onPressed: () {
-                Get.toNamed(Routes.MOVIE_SCREEN);
-              },
-              icon: Icon(Icons.search))
-        ],
-        // backgroundColor: Color(0xFFF1EFD4),
-        elevation: 0,
+        backgroundColor: Color(0xFF262F42),
+        elevation: 1,
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        mainAxisSpacing: 20,
-        // crossAxisSpacing: 6,
-        children: movies.map((movie) {
-          return GestureDetector(
-            onTap: () {
-              // Navigator.pushNamed(context, '/movie-details', arguments: movie);
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-              child: Container(
-                height: 80,
-                child: Image.network(
-                  "https://image.tmdb.org/t/p/original/4ssDuvEDkSArWEdyBl2X5EHvYKU.jpg",
-                  // fit: BoxFit.fitWidth,
-                ),
-              ),
-            ),
-          );
-        }).toList(),
+      body: GridView.builder(
+        padding: EdgeInsets.all(16),
+        itemCount: moviesOption.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+            childAspectRatio: 0.7),
+        itemBuilder: (BuildContext context, int index) {
+          return SelectMovieTile(movie: moviesOption[index]);
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          controller.getMoviesData();
+          // Get.toNamed(Routes.MOVIE_SCREEN,
+          //     arguments: jsonEncode(controller.allRecommendedMovies));
+        },
+        child: Icon(Icons.arrow_forward_rounded),
       ),
     );
   }

@@ -15,19 +15,12 @@ class MovieScreenView extends GetView<MovieScreenController> {
     print(result.body);
   }
 
-  void movieSearchQuery(String movieName) async {
-    String baseUrl = "http://10.0.2.2:5000/predicted_movies/$movieName";
-    final result = await http.get(Uri.parse(baseUrl));
-
-    debugPrint(result.body);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(onPressed: () {
         // movieQuery("h");
-        movieSearchQuery("The Dark Knight Rises");
+        // movieSearchQuery("The Dark Knight Rises");
       }),
       appBar: AppBar(
         title: Expanded(
