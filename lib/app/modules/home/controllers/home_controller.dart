@@ -48,7 +48,7 @@ class HomeController extends GetxController {
     await MyStorage.saveArguments(allRecommendedMovies!);
     print("data");
     print(await MyStorage.getSavedArguments());
-    await MyStorage.box.erase();
+    // await MyStorage.box.erase();
     // debugPrint("${allRecommendedMovies} working");
   }
 }

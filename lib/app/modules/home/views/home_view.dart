@@ -42,8 +42,9 @@ class HomeView extends GetView<HomeController> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           controller.getMoviesData();
-          // Get.toNamed(Routes.MOVIE_SCREEN,
-          //     arguments: jsonEncode(controller.allRecommendedMovies));
+          Get.toNamed(
+            Routes.MOVIE_SCREEN,
+          );
         },
         child: Icon(Icons.arrow_forward_rounded),
       ),
