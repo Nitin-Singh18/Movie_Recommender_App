@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:movie_recommendation_system/app/data/const/app_colors.dart';
+import 'package:movie_recommendation_system/app/data/widgets/similar_movie_tile.dart';
 
-import '../../../data/widgets/home_screen_movie_tile.dart';
 import '../controllers/movies_similar_to_screen_controller.dart';
 
 class MoviesSimilarToScreenView
@@ -11,21 +12,18 @@ class MoviesSimilarToScreenView
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.mainDarkModeColor,
       appBar: AppBar(
-        title: const Text('MoviesSimilarToScreenView'),
+        title: const Text('Similar Movies'),
         centerTitle: true,
+        backgroundColor: AppColors.mainDarkModeColor,
       ),
       body: GetBuilder<MoviesSimilarToScreenController>(builder: (controller) {
-        return GridView.builder(
+        return ListView.builder(
           padding: EdgeInsets.all(16),
           itemCount: controller.movies!.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              childAspectRatio: 0.7),
           itemBuilder: (BuildContext context, int index) {
-            return HomeScreenMovieTile(
+            return SimilarMovieTile(
               movie: controller.movies![index],
             );
           },
