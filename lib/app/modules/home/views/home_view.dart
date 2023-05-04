@@ -37,11 +37,24 @@ class HomeView extends GetView<HomeController> {
           return SelectMovieTile(movie: moviesOption[index]);
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller.getMoviesData();
-        },
-        child: Icon(Icons.arrow_forward_rounded),
+      floatingActionButton: Align(
+        alignment: Alignment.bottomCenter,
+        child: Padding(
+          padding: EdgeInsets.only(left: 20.0),
+          child: FloatingActionButton.extended(
+            onPressed: () {
+              // add your code here
+            },
+            backgroundColor: Colors.black,
+            label: GetBuilder<HomeController>(builder: (context) {
+              return Text(
+                  controller.isSelected ? "Recommend Movies" : 'Select Movie');
+            }),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+          ),
+        ),
       ),
     );
   }
