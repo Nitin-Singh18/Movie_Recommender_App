@@ -18,24 +18,36 @@ class SelectMovieTile extends StatelessWidget {
       },
       child: GetBuilder<HomeController>(
         builder: (controller) {
-          return Container(
-            decoration: BoxDecoration(
-                border: Border.all(
-                  width: controller.selectedMovies.contains(movie) ? 3 : 2,
-                  color: controller.selectedMovies.contains(movie)
-                      ? Colors.green
-                      // Color(0xFF7A6791)
-                      : Colors.black,
+          return Stack(children: [
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    width: controller.selectedMovies.contains(movie) ? 3 : 2,
+                    color: controller.selectedMovies.contains(movie)
+                        ?
+                        // Colors.green
+                        Color(0xFF7A6791)
+                        : Colors.black,
+                  ),
+                  borderRadius: BorderRadius.circular(12)),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(
+                  movie.moviePoster,
+                  fit: BoxFit.cover,
                 ),
-                borderRadius: BorderRadius.circular(12)),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.asset(
-                movie.moviePoster,
-                fit: BoxFit.cover,
               ),
             ),
-          );
+            if (controller.selectedMovies.contains(movie))
+              Positioned(
+                top: 5,
+                right: 5,
+                child: Icon(Icons.check_circle, size: 30, color: Colors.green
+                    // Color(0xFF7A6791),
+                    ),
+              ),
+          ]);
         },
       ),
     );
