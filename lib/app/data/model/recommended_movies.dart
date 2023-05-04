@@ -1,14 +1,17 @@
 class RecommendedMovie {
   final String title;
   final String description;
-  final double popularity;
+  final String popularity;
   final String posterPath;
+  final String backdropPosterPath;
+
   final String releaseDate;
   final List<SpokenLanguages> spokenLanguages;
   final List<Genre> genres;
 
   const RecommendedMovie(
       {required this.posterPath,
+      required this.backdropPosterPath,
       required this.releaseDate,
       required this.spokenLanguages,
       required this.genres,
@@ -18,14 +21,19 @@ class RecommendedMovie {
 
   factory RecommendedMovie.fromJson(Map<String, dynamic> json) {
     return RecommendedMovie(
-      title: json['original_title'],
-      description: json['overview'],
-      popularity: json['popularity'],
-      posterPath: json['poster_path'],
-      releaseDate: json['release_date'],
-      spokenLanguages: List<SpokenLanguages>.from(
-          json['spoken_languages'].map((x) => SpokenLanguages.fromJson(x))),
-      genres: List<Genre>.from(json['genres'].map((x) => Genre.fromJson(x))),
+      title: json['original_title'] ?? "",
+      description: json['overview'] ?? "",
+      popularity: json['vote_average'].toString() ?? "",
+      backdropPosterPath: json['backdrop_path'] ?? "",
+      posterPath: json['poster_path'] ?? "",
+      releaseDate: json['release_date'] ?? "",
+      spokenLanguages: json['spoken_languages'] != null
+          ? List<SpokenLanguages>.from((json['spoken_languages'] as List)
+              .map((x) => SpokenLanguages.fromJson(x)))
+          : [],
+      genres: json['genres'] != null
+          ? List<Genre>.from(json['genres'].map((x) => Genre.fromJson(x)))
+          : [],
     );
   }
 
@@ -33,8 +41,9 @@ class RecommendedMovie {
     final Map<String, dynamic> json = new Map<String, dynamic>();
     json['original_title'] = this.title;
     json['overview'] = this.description;
-    json['popularity'] = this.popularity;
+    json['vote_average'] = this.popularity;
     json['poster_path'] = this.posterPath;
+    json['backdrop_path'] = this.backdropPosterPath;
     json['release_date'] = this.releaseDate;
     if (this.genres != null) {
       json['genres'] = this.genres.map((e) => e.toJson()).toList();
@@ -57,8 +66,8 @@ class Genre {
 
   factory Genre.fromJson(Map<String, dynamic> json) {
     return Genre(
-      id: json['id'],
-      name: json['name'],
+      id: json['id'] ?? "",
+      name: json['name'] ?? "",
     );
   }
 
@@ -75,13 +84,13 @@ class SpokenLanguages {
   SpokenLanguages({required this.languageName});
 
   factory SpokenLanguages.fromJson(Map<String, dynamic> json) {
-    return SpokenLanguages(languageName: json['name']);
+    return SpokenLanguages(languageName: json['english_name'] ?? "");
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> json = new Map<String, dynamic>();
 
-    json['name'] = this.languageName;
+    json['english_name'] = this.languageName;
     return json;
   }
 }

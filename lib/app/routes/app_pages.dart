@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/movie_detail_screen/bindings/movie_detail_screen_binding.dart';
+import '../modules/movie_detail_screen/views/movie_detail_screen_view.dart';
 import '../modules/movie_screen/bindings/movie_screen_binding.dart';
 import '../modules/movie_screen/views/movie_screen_view.dart';
 import '../modules/movies_similar_to_screen/bindings/movies_similar_to_screen_binding.dart';
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.MOVIES_SIMILAR_TO_SCREEN,
       page: () => const MoviesSimilarToScreenView(),
       binding: MoviesSimilarToScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.MOVIE_DETAIL_SCREEN,
+      page: () => MovieDetailScreenView(),
+      binding: MovieDetailScreenBinding(),
     ),
   ];
 }

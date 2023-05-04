@@ -5,7 +5,6 @@ import 'package:movie_recommendation_system/app/data/const/app_colors.dart';
 import 'package:movie_recommendation_system/app/data/widgets/home_screen_movie_tile.dart';
 import 'package:movie_recommendation_system/app/routes/app_pages.dart';
 
-import '../../../data/widgets/select_movie_widget.dart';
 import '../controllers/movie_screen_controller.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,19 +16,30 @@ class MovieScreenView extends GetView<MovieScreenController> {
     return Scaffold(
       backgroundColor: AppColors.mainDarkModeColor,
       appBar: AppBar(
-        title: Text("Recommended Movies"),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 12.0),
-            child: IconButton(
-              onPressed: () {
-                Get.toNamed(Routes.SEARCH_SCREEN);
-              },
-              icon: Icon(Icons.search),
-              color: Colors.white,
-            ),
-          )
-        ],
+        title: GestureDetector(
+          onTap: () => Get.toNamed(Routes.SEARCH_SCREEN),
+          child: Container(
+              height: 42,
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              margin: const EdgeInsets.symmetric(horizontal: 15),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(7)),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.search,
+                    color: Colors.black,
+                  ),
+                  SizedBox(
+                    width: 14,
+                  ),
+                  Text(
+                    "Search Movies Similar to...",
+                    style: TextStyle(color: Color(0xFF686868), fontSize: 18),
+                  )
+                ],
+              )),
+        ),
         leadingWidth: 2.4,
         backgroundColor: AppColors.mainDarkModeColor,
         automaticallyImplyLeading: false,

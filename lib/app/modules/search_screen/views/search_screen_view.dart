@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:movie_recommendation_system/app/data/const/app_colors.dart';
+import 'package:movie_recommendation_system/app/data/const/const.dart';
 import 'package:movie_recommendation_system/app/routes/app_pages.dart';
 
 import '../controllers/search_screen_controller.dart';
@@ -68,17 +69,21 @@ class SearchScreenView extends GetView<SearchScreenController> {
             : controller.searchResults.isEmpty
                 ? controller.searchText.isEmpty
                     ? Center(
-                        child: Text("Search Movie"),
+                        child: Text(
+                          "Search Movie",
+                          style: AppTextStyle.descriptionStyle,
+                        ),
                       )
-                    : Center(child: Text('No movies found'))
+                    : Center(
+                        child: Text(
+                        'No movies found',
+                        style: AppTextStyle.descriptionStyle,
+                      ))
                 : ListView.builder(
                     itemCount: controller.searchResults.length,
                     itemBuilder: (context, index) {
                       String movie = controller.searchResults[index];
                       return ListTile(
-                        // leading: Image.network(
-                        //   'https://image.tmdb.org/t/p/w92${movie.posterPath}',
-                        // ),
                         onTap: () {
                           Get.toNamed(Routes.MOVIES_SIMILAR_TO_SCREEN,
                               arguments: {"movie_name": movie});

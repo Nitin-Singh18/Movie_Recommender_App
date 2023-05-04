@@ -101,7 +101,7 @@ List<SelectMovies> moviesOption = [
       moviePoster: "assets/movies_poster/american psycho.jpg"),
   SelectMovies(
       movieId: "546554",
-      movieName: "knives out",
+      movieName: "Dungeons & Dragons: Wrath of the Dragon God",
       moviePoster: "assets/movies_poster/knives out.jpg"),
   SelectMovies(
       movieId: "807",

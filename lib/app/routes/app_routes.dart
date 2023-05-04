@@ -7,6 +7,7 @@ abstract class Routes {
   static const MOVIE_SCREEN = _Paths.MOVIE_SCREEN;
   static const SEARCH_SCREEN = _Paths.SEARCH_SCREEN;
   static const MOVIES_SIMILAR_TO_SCREEN = _Paths.MOVIES_SIMILAR_TO_SCREEN;
+  static const MOVIE_DETAIL_SCREEN = _Paths.MOVIE_DETAIL_SCREEN;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const MOVIE_SCREEN = '/movie-screen';
   static const SEARCH_SCREEN = '/search-screen';
   static const MOVIES_SIMILAR_TO_SCREEN = '/movies-similar-to-screen';
+  static const MOVIE_DETAIL_SCREEN = '/movie-detail-screen';
 }

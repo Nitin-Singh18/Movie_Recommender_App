@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_recommendation_system/app/modules/home/controllers/home_controller.dart';
-import 'package:movie_recommendation_system/app/routes/app_pages.dart';
 
 import '../model/select_movies.dart';
 
@@ -22,8 +21,11 @@ class SelectMovieTile extends StatelessWidget {
           return Container(
             decoration: BoxDecoration(
                 border: Border.all(
-                  width: controller.selectedMovies.contains(movie) ? 4 : 2,
-                  color: Colors.black,
+                  width: controller.selectedMovies.contains(movie) ? 3 : 2,
+                  color: controller.selectedMovies.contains(movie)
+                      ? Colors.green
+                      // Color(0xFF7A6791)
+                      : Colors.black,
                 ),
                 borderRadius: BorderRadius.circular(12)),
             child: ClipRRect(

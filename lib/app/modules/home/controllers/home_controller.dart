@@ -5,6 +5,8 @@ import 'package:movie_recommendation_system/app/data/functions/get_recommended_m
 import 'package:movie_recommendation_system/app/data/model/recommended_movies.dart';
 import 'package:movie_recommendation_system/app/data/model/select_movies.dart';
 
+import '../../../routes/app_pages.dart';
+
 class HomeController extends GetxController {
   final List<SelectMovies> selectedMovies = [];
   bool isSelected = false;
@@ -37,7 +39,13 @@ class HomeController extends GetxController {
       if (allRecommendedMovies!.contains(movies)) {
         print("already in");
       } else {
-        allRecommendedMovies!.addAll(movies!);
+        if (movies != null) {
+          for (var element in movies) {
+            if (element.posterPath.isNotEmpty) {
+              allRecommendedMovies!.add(element);
+            }
+          }
+        }
       }
       // print();
 
@@ -48,6 +56,9 @@ class HomeController extends GetxController {
     await MyStorage.saveArguments(allRecommendedMovies!);
     print("data");
     print(await MyStorage.getSavedArguments());
+    Get.toNamed(
+      Routes.MOVIE_SCREEN,
+    );
     // await MyStorage.box.erase();
     // debugPrint("${allRecommendedMovies} working");
   }

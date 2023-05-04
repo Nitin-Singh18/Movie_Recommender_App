@@ -23,8 +23,11 @@ class MoviesSimilarToScreenView
           padding: EdgeInsets.all(16),
           itemCount: controller.movies!.length,
           itemBuilder: (BuildContext context, int index) {
-            return SimilarMovieTile(
-              movie: controller.movies![index],
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: SimilarMovieTile(
+                movie: controller.movies![index],
+              ),
             );
           },
         );

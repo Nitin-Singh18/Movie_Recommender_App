@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:get/get.dart';
 import 'package:movie_recommendation_system/app/data/model/recommended_movies.dart';
 import 'package:movie_recommendation_system/app/modules/movie_screen/controllers/movie_screen_controller.dart';
+import 'package:movie_recommendation_system/app/routes/app_pages.dart';
 
 class HomeScreenMovieTile extends StatelessWidget {
   final RecommendedMovie movie;
@@ -19,8 +19,7 @@ class HomeScreenMovieTile extends StatelessWidget {
     print(movie.posterPath);
     return InkWell(
       onTap: () {
-        // controller.onMovieSelect(movie);
-        // print(controller.selectedMovies);
+        Get.toNamed(Routes.MOVIE_DETAIL_SCREEN, arguments: movie);
       },
       child: GetBuilder<MovieScreenController>(
         builder: (controller) {
@@ -33,10 +32,12 @@ class HomeScreenMovieTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12)),
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.network(
-                  "https://image.tmdb.org/t/p/original/${movie.posterPath}",
-                  fit: BoxFit.cover,
-                )),
+                child: movie.posterPath.isNotEmpty
+                    ? Image.network(
+                        "https://image.tmdb.org/t/p/original/${movie.posterPath}",
+                        fit: BoxFit.cover,
+                      )
+                    : SizedBox()),
           );
         },
       ),
