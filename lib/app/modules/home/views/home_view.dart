@@ -16,36 +16,46 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         title: GetBuilder<HomeController>(
           builder: (controller) {
-            return Text(controller.isSelected
-                ? "Movies Selected : ${controller.selectedMovies.length}"
-                : 'Select Movies You Like');
+            return controller.isLoading.value
+                ? Text("")
+                : Text(controller.isSelected
+                    ? "Movies Selected : ${controller.selectedMovies.length}"
+                    : 'Select Movies You Like');
           },
         ),
         centerTitle: true,
         backgroundColor: AppColors.mainDarkModeColor,
         elevation: 1,
       ),
-      body: GridView.builder(
-        padding: EdgeInsets.all(16),
-        itemCount: moviesOption.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-            childAspectRatio: 0.7),
-        itemBuilder: (BuildContext context, int index) {
-          return SelectMovieTile(movie: moviesOption[index]);
-        },
-      ),
+      body: Obx(() {
+        return controller.isLoading.value
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : GridView.builder(
+                padding: EdgeInsets.all(16),
+                itemCount: moviesOption.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 0.7),
+                itemBuilder: (BuildContext context, int index) {
+                  return SelectMovieTile(movie: moviesOption[index]);
+                },
+              );
+      }),
       floatingActionButton: Align(
         alignment: Alignment.bottomCenter,
         child: Padding(
           padding: EdgeInsets.only(left: 20.0),
           child: FloatingActionButton.extended(
             onPressed: () {
-              // add your code here
+              if (controller.selectedMovies.isNotEmpty) {
+                controller.getMoviesData();
+              }
             },
-            backgroundColor: Colors.black,
+            backgroundColor: Color(0xFF5A4C6B),
             label: GetBuilder<HomeController>(builder: (context) {
               return Text(
                   controller.isSelected ? "Recommend Movies" : 'Select Movie');

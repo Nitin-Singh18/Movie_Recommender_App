@@ -86,7 +86,9 @@ class SearchScreenView extends GetView<SearchScreenController> {
                       return ListTile(
                         onTap: () {
                           Get.toNamed(Routes.MOVIES_SIMILAR_TO_SCREEN,
-                              arguments: {"movie_name": movie});
+                              arguments: {
+                                "movie_name": movie,
+                              });
                         },
                         title: Text(
                           movie,

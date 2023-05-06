@@ -10,6 +10,7 @@ import '../../../routes/app_pages.dart';
 class HomeController extends GetxController {
   final List<SelectMovies> selectedMovies = [];
   bool isSelected = false;
+  var isLoading = false.obs;
   final List<RecommendedMovie>? allRecommendedMovies = [];
 
   void onMovieSelect(SelectMovies movie) {
@@ -32,6 +33,8 @@ class HomeController extends GetxController {
   }
 
   void getMoviesData() async {
+    isLoading.value = true;
+
     for (var element in selectedMovies) {
       final List<RecommendedMovie>? movies =
           await RecommendedMovies.movieSearchQuery(element.movieName);
@@ -53,12 +56,14 @@ class HomeController extends GetxController {
 
       // }
     }
+    isLoading.value = false;
     await MyStorage.saveArguments(allRecommendedMovies!);
     print("data");
     print(await MyStorage.getSavedArguments());
     Get.toNamed(
       Routes.MOVIE_SCREEN,
     );
+
     // await MyStorage.box.erase();
     // debugPrint("${allRecommendedMovies} working");
   }

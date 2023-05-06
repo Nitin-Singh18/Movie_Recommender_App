@@ -48,6 +48,21 @@ class MovieDetailScreenView extends GetView<MovieDetailScreenController> {
                     child: Tooltip(
                       message: "Watch Later",
                       child: Icon(
+                        Icons.favorite_border,
+                        color: Colors.white,
+                        size: 26,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    borderRadius: BorderRadius.circular(12),
+                    child: Tooltip(
+                      message: "Watch Later",
+                      child: Icon(
                         Icons.watch_later_outlined,
                         color: Colors.white,
                         size: 26,
@@ -138,6 +153,21 @@ class MovieDetailScreenView extends GetView<MovieDetailScreenController> {
                   ),
                 ],
               ),
+              SizedBox(
+                height: 20,
+              ),
+              // Container(
+              //   height: 60,
+              //   width: ,
+              //   alignment: Alignment.center,
+              //   decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(7),
+              //       color: Color(0xFF5A4C6B)),
+              //   child: Text(
+              //     "Like Movie",
+              //     style: TextStyle(fontSize: 18, color: Colors.white),
+              //   ),
+              // )
             ],
           ),
         ),

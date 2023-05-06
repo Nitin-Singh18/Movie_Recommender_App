@@ -14,7 +14,7 @@ class MoviesSimilarToScreenView
     return Scaffold(
       backgroundColor: AppColors.mainDarkModeColor,
       appBar: AppBar(
-        title: const Text('Similar Movies'),
+        title: Text('Similar Movies to "${controller.details['movie_name']}"'),
         centerTitle: true,
         backgroundColor: AppColors.mainDarkModeColor,
       ),

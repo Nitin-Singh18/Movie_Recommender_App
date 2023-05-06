@@ -33,10 +33,14 @@ class SimilarMovieTile extends StatelessWidget {
                   color: Colors.grey, borderRadius: BorderRadius.circular(8)),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(
-                  'https://image.tmdb.org/t/p/original/${movie.posterPath}',
-                  height: 120.0,
-                ),
+                child: movie.posterPath.isNotEmpty
+                    ? Image.network(
+                        'https://image.tmdb.org/t/p/original/${movie.posterPath}',
+                        height: 120.0,
+                      )
+                    : SizedBox(
+                        child: Icon(Icons.image_not_supported_outlined),
+                      ),
               ),
             ),
             const SizedBox(width: 12.0),
